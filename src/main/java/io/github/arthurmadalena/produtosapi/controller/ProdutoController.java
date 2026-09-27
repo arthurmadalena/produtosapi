@@ -4,6 +4,7 @@ import io.github.arthurmadalena.produtosapi.model.Produto;
 import io.github.arthurmadalena.produtosapi.repositories.ProdutoRespository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -42,6 +43,11 @@ public class ProdutoController {
     public void updateProduct (@PathVariable("id") String id, @RequestBody Produto produto) {
         produto.setId(id);
         produtoRespository.save(produto);
+    }
+
+    @GetMapping
+    public List<Produto> findProduct(@RequestParam("name") String name, @RequestParam("price") String price) {
+        return produtoRespository.findByName(name);
     }
 
 }

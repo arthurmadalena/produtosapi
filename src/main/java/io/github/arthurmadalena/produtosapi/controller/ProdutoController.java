@@ -2,11 +2,9 @@ package io.github.arthurmadalena.produtosapi.controller;
 
 import io.github.arthurmadalena.produtosapi.model.Produto;
 import io.github.arthurmadalena.produtosapi.repositories.ProdutoRespository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -29,5 +27,10 @@ public class ProdutoController {
 
         produtoRespository.save(produto);
         return produto;
+    }
+
+    @GetMapping("/{id}")
+    public Produto getProdutoById(@PathVariable("id") String id) {
+        return produtoRespository.findById(id).orElse(null);
     }
 }
